@@ -34,6 +34,9 @@ exclude = NA
 logt = FALSE
 
 
+# Two issues:
+# 1. can't distinguish from continuous and discrete
+# 2. should excluded one like special values remain or as NA
 outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden.m ="resistant", fix.m = "asNABoth",rangeLU=NULL, k=1.5, exclude=NA, logt=FALSE){
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
@@ -154,7 +157,7 @@ dt <- data.table(type = factor(rep(c("A","B"), each = 50)),
                  rating = c(rnorm(200),rnorm(200, mean=.6)))
 dt[3,"rating"]=NA
 dt[400,"rating"]=3
-outlierfix(dt,col_name,interactive = TRUE)
+t = outlierfix(dt,col_name,interactive = FALSE)
 
 
 #-- test2
