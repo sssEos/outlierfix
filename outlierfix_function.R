@@ -7,36 +7,6 @@
 #' @keywords
 #' @export
 #' @examples
-data.table::as.data.table()
-univOutl::boxB()
-
-dt <- data.table(type = factor(rep(c("A","B"), each = 50)),
-                 rating = c(rnorm(200),rnorm(200, mean=2)))
-
-dt <- data.table(type = factor(rep(c("A","B"), each = 50)),
-                 rating = sample(c(1.5,2.5),100,replace=TRUE))
-# dt[c(3,6,12,17,300,250),"rating"]=300
-dt[c(3),"rating"]=300
-col_name="rating"
-type="continuous"
-rangeLU=c(-Inf,Inf)
-k=1.5
-exclude = NA
-logt = FALSE
-
-dt = as.data.table(mtcars)
-col_name="wt"
-dt[4,]$wt=NA
-type="continuous"
-rangeLU=c(2.5:3.5)
-k=1.5
-exclude = NA
-logt = FALSE
-
-
-# Two issues:
-# 1. can't distinguish from continuous and discrete
-# 2. should excluded one like special values remain or as NA
 outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden.m ="resistant", fix.m = "asNABoth",rangeLU=NULL, k=1.5, exclude=NA, logt=FALSE){
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
@@ -46,6 +16,9 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
   if(is.element(type,c("continuous","categorical"))==FALSE){
     stop('Data type is not accurate. Ensure the type to be continuous or categorical.')
   }
+  if(length(unique(dt[,get(col_name)]))<10){
+    warning("The data are highly likely discrete.")
+  }
   if(interactive==TRUE){
     if(type=="continuous"){
       # exclude the data that no-need as NA
@@ -53,6 +26,9 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
       if(is.null(rangeLU)) rangeLU <- c(-Inf,Inf)
       fix.name <- paste0(col_name,".","fixed")
       dt[,fix.name] <- dt[,get(col_name)]
+      # assign exclude as NA
+      dt[get(fix.name)%in%exclude,(fix.name):=NA]
+
       dt[(get(col_name)>=rangeLU[2])|(get(col_name)<=rangeLU[1]), (fix.name):=NA]
 
       # display the distribution for deciding which method to identify outliers
@@ -78,6 +54,8 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
         identify.method <- c("resistant","asymmetric","adjbox")[iden.mnbr]
         outlierind <- univOutl::boxB(dt[,get(col_name)],k=k,method=identify.method,exclude=exclude,logt=logt)
 
+
+
         if(fix.method=="dprowBoth") dt <- dt[!outlierind$outliers,]
         if(fix.method=="dprowLeft") dt <- dt[!outlierind$lowOutl,]
         if(fix.method=="dprowRight") dt <- dt[!outlierind$upOutl,]
@@ -87,10 +65,11 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
         if(fix.method=="median") dt[outlierind$outliers,(fix.name):=median(dt[!outlierind$outliers,get(fix.name)])]
         if(fix.method=="mean") dt[outlierind$outliers,(fix.name):=mean(dt[!outlierind$outliers,get(fix.name)])]
 
+
       }
       if(iden.mnbr==4){
-        # convert values in exclude vector as NA
-        dt[get(fix.name)%in%exclude,(fix.name):=NA]
+        # # convert values in exclude vector as NA
+        # dt[get(fix.name)%in%exclude,(fix.name):=NA]
         dt[,(fix.name):=DescTools::Winsorize(dt[,get(fix.name)],na.rm = T)]
       }
 
@@ -114,10 +93,13 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
       if(is.null(rangeLU)) rangeLU <- c(-Inf,Inf)
       fix.name <- paste0(col_name,".","fixed")
       dt[,fix.name] <- dt[,get(col_name)]
+      dt[get(fix.name)%in%exclude,(fix.name):=NA]
       dt[(get(col_name)>=rangeLU[2])|(get(col_name)<=rangeLU[1]), (fix.name):=NA]
 
       bp <- ggplot2::ggplot(dt, aes(x =get(col_name))) + geom_histogram(aes(y = ..density..),binwidth = .5,colour = "blue", fill = "white")+geom_density(alpha = .2, fill="#FF6655")+labs(x="histogram")
       bp_box <- ggplot2::ggplot(dt, aes(get(col_name))) + geom_boxplot(colour = "blue", fill = "white",outlier.colour = "red", outlier.shape = 1)+labs(x="boxplot")
+
+
 
       if(iden.m%in%c("resistant","asymmetric","adjbox")){
         outlierind <- univOutl::boxB(dt[,get(col_name)],k=k,method=iden.m,exclude=exclude,logt=logt)
@@ -132,7 +114,7 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
         if(fix.m=="mean") dt[outlierind$outliers,(fix.name):=mean(dt[!outlierind$outliers,get(fix.name)])]
       }
       if(iden.m=="winsorize"){
-        dt[get(fix.name)%in%exclude,(fix.name):=NA]
+        # dt[get(fix.name)%in%exclude,(fix.name):=NA]
         dt[,(fix.name):=DescTools::Winsorize(dt[,get(fix.name)],na.rm = T)]
       }
 
@@ -152,17 +134,17 @@ outlierfix <- function(dt,col_name, interactive = FALSE, type="continuous", iden
   return(dt)
 }
 
-#-- test1
-dt <- data.table(type = factor(rep(c("A","B"), each = 50)),
-                 rating = c(rnorm(200),rnorm(200, mean=.6)))
-dt[3,"rating"]=NA
-dt[400,"rating"]=3
-t = outlierfix(dt,col_name,interactive = FALSE)
-
-
-#-- test2
-dt = as.data.table(mtcars)
-outlierfix(dt,col_name="wt",type="continuous",rangeLU=c(2.5,3.5),k=1.5,exclude = NA,logt = FALSE)
+# #-- test1
+# dt <- data.table(type = factor(rep(c("A","B"), each = 50)),
+#                  rating = c(rnorm(200),rnorm(200, mean=.6)))
+# dt[3,"rating"]=NA
+# dt[400,"rating"]=3
+# t = outlierfix(dt,col_name,interactive = TRUE,exclude=c(NA,3))
+#
+#
+# #-- test2
+# dt = as.data.table(mtcars)
+# outlierfix(dt,col_name="wt",type="continuous",rangeLU=c(2.5,3.5),k=1.5,exclude = NA,logt = FALSE)
 
 
 # Take below types of data into consideration:
