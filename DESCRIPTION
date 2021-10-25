@@ -1,29 +1,26 @@
 Package: outlierfix
 Title: Fix outliers in columns of data table
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Xiaodan",
            family = "Shao",
            role = c("cre","aut"),
-           email = "SHAO0043@e.ntu.edu.sg")
+           email = "SHAO0043@e.ntu.edu.sg"),
     person(given = "Vivek",
            family = "Choudhary",
-           role = c("aut"),
-           email = "vivek.choudhary@ntu.edu.sg")
-           
+           role = "aut",
+           email = "vivek.choudhary@ntu.edu.sg"))
 Description: This package is used to identify and fix outliers in data table. It assumes that the columns containing continuous numbers in data table and fix the column without changing original data set with chosen methods accordingly. Users can see the plots and use the interative way to help them decide methods to chose.
 License: GPL-3
 URL: https://github.com/sssEos/outlierfix
 BugReports: https://github.com/sssEos/outlierfix/issues
-Depends:
-    R (>=3.5.0)
 Imports:
-    data.table (>=1.14.0),
-    univOutl (>=0.3), 
-    base (>=4.0.2), 
-    ggplot2 (>=3.3.5),
-    ggpubr (>=0.4.0), 
-    DescTools (>=0.99.38)
+    data.table,
+    univOutl, 
+    base, 
+    ggplot2,
+    ggpubr, 
+    DescTools
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
