@@ -5,8 +5,12 @@ Authors@R:
     person(given = "Xiaodan",
            family = "Shao",
            role = c("cre","aut"),
-           email = "SHAO0043@e.ntu.edu.sg",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "SHAO0043@e.ntu.edu.sg")
+    person(given = "Vivek",
+           family = "Choudhary",
+           role = c("aut"),
+           email = "vivek.choudhary@ntu.edu.sg")
+           
 Description: This package is used to identify and fix outliers in data table. It assumes that the columns containing continuous numbers in data table and fix the column without changing original data set with chosen methods accordingly. Users can see the plots and use the interative way to help them decide methods to chose.
 License: GPL-3
 URL: https://github.com/sssEos/outlierfix
