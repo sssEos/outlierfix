@@ -29,8 +29,8 @@ fixout_conti <-
       install.packages("pacman")
     pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
     # check dataset is datatable
-    if (is.element("data.table", class(dt)) == FALSE)
-      dt = as.data.table(dt)
+    # if (is.element("data.table", class(dt)) == FALSE)
+    dt = as.data.table(dt)
     # overwirte ----detect type
     if (length(unique(dt[, get(col_name)])) < 10) {
       warning("The data are highly likely not continuous.")
