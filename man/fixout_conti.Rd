@@ -27,13 +27,13 @@ fixout_conti(
 
 \item{fix.m}{A string shows the chosen method for fixing outliers. "dropBoth": drop the whole row where outliers are from both sides of the data; "dropLeft": drop the whole row where outliers are from left side of the data; "dropRight": drop the whole row where outliers are from right side of the data; "asNABoth": convert outliers from both sides of the data as missing values; "asNALeft": convert outliers from left side of the data as missing values,"asNARight": convert outliers from right side of the data as missing values; "median": replace outliers with median; "mean": replace outliers with mean.}
 
+\item{rangeLU}{The lower and upper limit of range for the data.}
+
 \item{k}{A constant to determine the lines outside the upper and lower quartiles.}
 
 \item{exclude}{Values that will be excluded in the numbers to be processed. Missing values are removed by default when detecting outliers.}
 
 \item{logt}{TRUE/FALSE, whether the numbers are transformed with an lognormal distribution.}
-
-\item{rangLU}{The lower and upper limit of range for the data.}
 }
 \value{
 A data table contains the fixed column.
