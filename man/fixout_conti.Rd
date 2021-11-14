@@ -13,11 +13,12 @@ fixout_conti(
   rangeLU = NULL,
   k = 1.5,
   exclude = NA,
-  logt = FALSE
+  logt = FALSE,
+  plot = FALSE
 )
 }
 \arguments{
-\item{dt}{A variable shows the name of data table.}
+\item{dt}{A data frame or a data.table.}
 
 \item{col_name}{A string indicates column name with data need to be fixed.}
 
@@ -34,12 +35,14 @@ fixout_conti(
 \item{exclude}{Values that will be excluded in the numbers to be processed. Missing values are removed by default when detecting outliers.}
 
 \item{logt}{TRUE/FALSE, whether the numbers are transformed with an lognormal distribution.}
+
+\item{plot}{TRUE/FALSE, whether plots are shown.}
 }
 \value{
 A data table contains the fixed column.
 }
 \description{
-This function fix outliers in continuous data. It assumes that the columns containing continuous numbers in data table and fix the column without changing original data set with chosen methods accordingly.
+This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
 }
 \examples{
 data <- as.data.table(mtcars)
