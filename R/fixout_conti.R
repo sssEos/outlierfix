@@ -1,7 +1,7 @@
 #' @title fixout_conti
-#' @description This function fix outliers in continuous data. It assumes that the columns containing continuous numbers in data table and fix the column without changing original data set with chosen methods accordingly.
+#' @description This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
 #'
-#' @param dt A variable shows the name of data table.
+#' @param dt A data frame or a data.table.
 #' @param col_name A string indicates column name with data need to be fixed.
 #' @param interactive TRUE/FALSE, whether to fix the outliers in an interactive way.
 #' @param iden.m A string shows the chosen method for identifying outliers."resistant": standard boxplot; "asymmetric": modification of standard method to deal with (moderately) skewed data;"adjbox": adjusted boxplot for skewed distributions;"winsorize": the smallest and/or the largest values are replaced by less extreme values.
@@ -10,6 +10,7 @@
 #' @param k A constant to determine the lines outside the upper and lower quartiles.
 #' @param exclude Values that will be excluded in the numbers to be processed. Missing values are removed by default when detecting outliers.
 #' @param logt TRUE/FALSE, whether the numbers are transformed with an lognormal distribution.
+#' @param plot TRUE/FALSE, whether plots are shown.
 #' @return A data table contains the fixed column.
 #' @examples
 #' data <- as.data.table(mtcars)
@@ -24,16 +25,19 @@ fixout_conti <-
            rangeLU = NULL,
            k = 1.5,
            exclude = NA,
-           logt = FALSE) {
-    if (!require("pacman"))
-      install.packages("pacman")
+           logt = FALSE,
+           plot = FALSE) {
+    
+    #required packages
+    if (!require("pacman")) install.packages("pacman")
     pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
-    # check dataset is datatable
+    
+    # change the data.frame into data.table 
     # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
     # overwirte ----detect type
     if (length(unique(dt[, ..col_name])) < 10) {
-      warning("The data are highly likely not continuous.")
+      warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
       # exclude the data that no-need as NA
@@ -92,7 +96,7 @@ fixout_conti <-
             prompt = cat(
               "Enter number for identified method used on outliers: ",
               "\n",
-              "1.resistant: standard boxplot fences",
+              "1.resistant: uses standard boxplot fences",
               "\n",
               "2.asymmetric: modification of standard method to deal with (moderately) skewed data",
               "\n",
@@ -162,7 +166,7 @@ fixout_conti <-
             "median",
             "mean"
           )[fix.mnbr]
-
+        print("The function is detecting outliers from both sides but will fix them according to the methods chosen.")
         # get the position of outliers and fix
         identify.method <-
           c("resistant", "asymmetric", "adjbox")[iden.mnbr]
@@ -199,7 +203,7 @@ fixout_conti <-
         # dt[get(fix.name)%in%exclude,(fix.name):=NA]
         dt[, (fix.name) := DescTools::Winsorize(dt[, get(fix.name)], na.rm = T)]
       }
-
+      print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       # show plots before and after fixing outliers
       ap <-
         ggplot2::ggplot(dt, aes(x = get(fix.name))) + geom_histogram(
@@ -215,7 +219,8 @@ fixout_conti <-
           outlier.colour = "red",
           outlier.shape = 1
         ) + labs(x = "fix.boxplot")
-      print(ggpubr::ggarrange(
+      #suppress warnings from ggplot
+      suppressWarnings(print(ggpubr::ggarrange(
         bp,
         ap,
         bp_box,
@@ -223,7 +228,7 @@ fixout_conti <-
         labels = c("before", "after", "before", "after"),
         ncol = 2,
         nrow = 2
-      ))
+      )))
     }
     if (interactive == FALSE) {
       if (is.null(rangeLU))
@@ -249,6 +254,8 @@ fixout_conti <-
           outlier.shape = 1
         ) + labs(x = "boxplot")
 
+      print("The function is detecting outliers from both sides but will fix them according to the methods chosen.")
+      
       if (iden.m %in% c("resistant", "asymmetric", "adjbox")) {
         outlierind <-
           univOutl::boxB(
@@ -281,6 +288,7 @@ fixout_conti <-
         dt[, (fix.name) := DescTools::Winsorize(dt[, get(fix.name)], na.rm = T)]
       }
 
+      print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       ap <-
         ggplot2::ggplot(dt, aes(x = get(fix.name))) + geom_histogram(
           aes(y = ..density..),
@@ -295,21 +303,29 @@ fixout_conti <-
           outlier.colour = "red",
           outlier.shape = 1
         ) + labs(x = "fix.boxplot")
-      print(ggpubr::ggarrange(
-        bp,
-        ap,
-        bp_box,
-        ap_box,
-        labels = c("before", "after", "before", "after"),
-        ncol = 2,
-        nrow = 2
-      ))
+      
+  
+      if(plot==TRUE){
+        # suppress warnings from ggplot
+        suppressWarnings(print(ggpubr::ggarrange(
+          bp,
+          ap,
+          bp_box,
+          ap_box,
+          labels = c("before", "after", "before", "after"),
+          ncol = 2,
+          nrow = 2
+        )))
+      }
+      
 
 
     }
 
 
     dt
+    
+    
   }
 
 

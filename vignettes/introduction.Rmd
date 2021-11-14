@@ -42,6 +42,16 @@ Save the output as new data table.
 dt1=fixout_conti(dt, col_name="income",interactive = FALSE,exclude=1200)
 dt1
 ```
+This function can be used to process multiple columns in a data table when leveraging loop. It is worth noting this approach is not suitable when the fixed method related to "drop" because some rows of data has been dropped while processing sequentially.
+```{r}
+col_names <- c("age", "income" )
+fix.m <-c("asNARight", "asNALeft" )
+dt1 <- dt
+#remove outliers 
+for( i in 1: length(col_names)){
+  dt1=fixout_conti(dt1,col_name=col_names[i], fix.m = fix.m[i])
+}
+```
 
 
 
