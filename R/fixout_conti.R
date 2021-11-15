@@ -50,10 +50,10 @@ fixout_conti <-
       dt[, fix.name] <- dt[, col_name,with = FALSE]
       # assign exclude as NA
 
-      dt[get(fix.name) %in% exclude, (fix.name) := NA]
+      dt[get(fix.name) %in% exclude, fix.name := NA]
 
-      dt[(get(col_name) >= rangeLU[2]) |
-           (get(col_name) <= rangeLU[1]), (fix.name) := NA]
+      dt[((get(col_name) >= rangeLU[2]) |
+           (get(col_name) <= rangeLU[1])), fix.name := NA]
 
       # display the distribution for deciding which method to identify outliers
       bp <-
@@ -239,9 +239,11 @@ fixout_conti <-
       fix.name <- paste0(col_name, ".", "fixed")
 
       dt[, fix.name] <- dt[, col_name, with = FALSE]
-      dt[get(fix.name) %in% exclude, (fix.name) := NA]
-      dt[(get(col_name) >= rangeLU[2]) |
-           (get(col_name) <= rangeLU[1]), (fix.name) := NA]
+      # dt[, fix.name := col_name]
+
+      dt[get(fix.name) %in% exclude, fix.name := NA]
+      dt[((get(col_name) >= rangeLU[2]) |
+           (get(col_name) <= rangeLU[1])), fix.name := NA]
 
       bp <-
         ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
