@@ -21,10 +21,6 @@ install_github("sssEos/outlierfix")
 library(outlierfix)
 ```
 
-```{r}
-# source("R/fixout_conti.R")
-```
-
 Let us create some sample data for fixing outliers later.
 ```{r}
 library(data.table)

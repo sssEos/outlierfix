@@ -15,7 +15,6 @@ License: GPL-3
 URL: https://github.com/sssEos/outlierfix
 BugReports: https://github.com/sssEos/outlierfix/issues
 Imports:
-    data.table,
     univOutl, 
     base, 
     ggplot2,
