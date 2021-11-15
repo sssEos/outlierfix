@@ -17,10 +17,11 @@ BugReports: https://github.com/sssEos/outlierfix/issues
 Imports:
     univOutl, 
     base, 
-    ggplot2,
     ggpubr, 
     DescTools
-Depends:  data.table (>= 1.9.6)
+Depends:  
+    data.table (>= 1.9.6),
+    ggplot2 (>= 1.1.1)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

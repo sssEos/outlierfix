@@ -29,8 +29,8 @@ fixout_conti <-
            plot = FALSE) {
 
     #required packages
-    if (!require("pacman")) install.packages("pacman")
-    pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
+    # if (!require("pacman")) install.packages("pacman")
+    # pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
 
     # change the data.frame into data.table
     # if (is.element("data.table", class(dt)) == FALSE)
