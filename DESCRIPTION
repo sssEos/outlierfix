@@ -21,6 +21,7 @@ Imports:
     ggplot2,
     ggpubr, 
     DescTools
+Depends:  data.table (>= 1.9.6)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
