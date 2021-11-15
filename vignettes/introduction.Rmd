@@ -10,8 +10,7 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  echo=FALSE
+  comment = "#>"
 )
 ```
 
@@ -29,7 +28,7 @@ library(outlierfix)
 Let us create some sample data for fixing outliers later.
 ```{r}
 library(data.table)
-dt <- data.table(age= c(89,23, 26, 21, 31, 38, 34, 25, 65,32, 36 ,38, 35 ,30 ,35, 20,11),income=c(1200,1400,1350,1600,7580,3620,2500,4230,4830,3820,5230,3360,2860,3120,2970,3000,4500))
+dt <- as.data.table(age= c(89,23, 26, 21, 31, 38, 34, 25, 65,32, 36 ,38, 35 ,30 ,35, 20,11),income=c(1200,1400,1350,1600,7580,3620,2500,4230,4830,3820,5230,3360,2860,3120,2970,3000,4500))
 dt
 ```
 ### 1. Detecting and fixing outliers in an interactive way
@@ -40,11 +39,11 @@ fixout_conti(dt, col_name="age",rangeLU=c(20,60))
 ### 2. Detecting and fixing outliers in an automatic way
 choose column __income__ to fix the outliers automatically. In this case, we want to have all figures in range but exclude the income equals to 1200. Missing values are excluded in default.
 ```{r}
-fixout_conti(dt, col_name="income",interactive = FALSE,exclude=1200, plot = TRUE)
+fixout_conti(dt, col_name="income",interactive = FALSE,exclude=1200)
 ```
 Save the output as new data table.
 ```{r}
-dt1=fixout_conti(dt, col_name="income",interactive = FALSE,exclude=1200, plot = TRUE)
+dt1=fixout_conti(dt, col_name="income",interactive = FALSE,exclude=1200)
 dt1
 ```
 This function can be used to process multiple columns in a data table when leveraging loop. It is worth noting this approach is not suitable when the fixed method related to "drop" because some rows of data has been dropped while processing sequentially.
