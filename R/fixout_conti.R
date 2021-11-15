@@ -48,14 +48,10 @@ fixout_conti <-
       fix.name <- paste0(col_name, ".", "fixed")
       dt[, fix.name] <- dt[, col_name,with = FALSE]
       # assign exclude as NA
-      # dt[fix.name=paste0(col_name, ".", "fixed")]
-      # dt[get(fix.name) %in% exclude, c(fix.name) := NA]
+      dt[get(fix.name) %in% exclude,c(fix.name):=NA]
 
-      dt[dt[,get(fix.name) %in% exclude],c(fix.name):=NA]
-
-      dt[dt[,((get(col_name) >= rangeLU[2]) |
-           (get(col_name) <= rangeLU[1]))], c(fix.name) := NA]
-
+      dt[(get(col_name) >= rangeLU[2]) |
+           (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
       # display the distribution for deciding which method to identify outliers
       bp <-
         ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
@@ -204,7 +200,6 @@ fixout_conti <-
       }
       if (iden.mnbr == 4) {
         # # convert values in exclude vector as NA
-        # dt[get(fix.name)%in%exclude,(fix.name):=NA]
         dt[, (fix.name) := DescTools::Winsorize(dt[, get(fix.name)], na.rm = T)]
       }
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
@@ -240,16 +235,11 @@ fixout_conti <-
       fix.name <- paste0(col_name, ".", "fixed")
 
       dt[, fix.name] <- dt[, col_name, with = FALSE]
-      # dt[, fix.name := col_name]
 
-      # dt[get(fix.name) %in% exclude, c(fix.name) := NA]
-      # dt[((get(col_name) >= rangeLU[2]) |
-      #      (get(col_name) <= rangeLU[1])), c(fix.name) := NA]
+      dt[get(fix.name) %in% exclude,c(fix.name):=NA]
 
-      dt[dt[,get(fix.name) %in% exclude],c(fix.name):=NA]
-
-      dt[dt[,((get(col_name) >= rangeLU[2]) |
-                (get(col_name) <= rangeLU[1]))], c(fix.name) := NA]
+      dt[(get(col_name) >= rangeLU[2]) |
+                (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
 
       bp <-
         ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
