@@ -1,8 +1,8 @@
 ---
-title: "Introduction"
+title: "introduction"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction}
+  %\VignetteIndexEntry{introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -35,7 +35,7 @@ dt
 ### 1. Detecting and fixing outliers in an interactive way
 Firstly, we focus on the __age__, set the age limit within 20-60, which make more sense for working age. Enter the number of chosen method for identifying outliers, we try 1 and according to the histogram and boxplot of data to choose the subsequent fix method (enter number)
 ```{r}
-fixout_conti(dt, col_name="age",rangeLU=c(20,60), interactive = TRUE, plot=TRUE)
+fixout_conti(dt, col_name="age",rangeLU=c(20,60))
 print(names(all_applicants))
 ```
 ### 2. Detecting and fixing outliers in an automatic way

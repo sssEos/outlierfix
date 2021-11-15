@@ -38,7 +38,6 @@ fixout_conti <-
     # overwirte ----detect type
     # index=which(colnames(dt)==col_name)
     if (length(unique(dt[, col_name,with=FALSE])) < 10) {
-      print("p")
       warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
@@ -50,10 +49,12 @@ fixout_conti <-
       dt[, fix.name] <- dt[, col_name,with = FALSE]
       # assign exclude as NA
       # dt[fix.name=paste0(col_name, ".", "fixed")]
-      dt[get(fix.name) %in% exclude, c(fix.name) := NA]
+      # dt[get(fix.name) %in% exclude, c(fix.name) := NA]
 
-      dt[((get(col_name) >= rangeLU[2]) |
-           (get(col_name) <= rangeLU[1])), c(fix.name) := NA]
+      dt[dt[,get(fix.name) %in% exclude],c(fix.name):=NA]
+
+      dt[dt[,((get(col_name) >= rangeLU[2]) |
+           (get(col_name) <= rangeLU[1]))], c(fix.name) := NA]
 
       # display the distribution for deciding which method to identify outliers
       bp <-
@@ -241,9 +242,14 @@ fixout_conti <-
       dt[, fix.name] <- dt[, col_name, with = FALSE]
       # dt[, fix.name := col_name]
 
-      dt[get(fix.name) %in% exclude, c(fix.name) := NA]
-      dt[((get(col_name) >= rangeLU[2]) |
-           (get(col_name) <= rangeLU[1])), c(fix.name) := NA]
+      # dt[get(fix.name) %in% exclude, c(fix.name) := NA]
+      # dt[((get(col_name) >= rangeLU[2]) |
+      #      (get(col_name) <= rangeLU[1])), c(fix.name) := NA]
+
+      dt[dt[,get(fix.name) %in% exclude],c(fix.name):=NA]
+
+      dt[dt[,((get(col_name) >= rangeLU[2]) |
+                (get(col_name) <= rangeLU[1]))], c(fix.name) := NA]
 
       bp <-
         ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
