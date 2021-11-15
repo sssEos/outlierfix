@@ -47,7 +47,7 @@ fixout_conti <-
       if (is.null(rangeLU))
         rangeLU <- c(-Inf, Inf)
       fix.name <- paste0(col_name, ".", "fixed")
-      dt[, fix.name] <- dt[, ..col_name]
+      dt[, fix.name] <- dt[, col_name,with = FALSE]
       # assign exclude as NA
 
       dt[get(fix.name) %in% exclude, (fix.name) := NA]
@@ -238,7 +238,7 @@ fixout_conti <-
         rangeLU <- c(-Inf, Inf)
       fix.name <- paste0(col_name, ".", "fixed")
 
-      dt[, fix.name] <- dt[, ..col_name]
+      dt[, fix.name] <- dt[, col_name, with = FALSE]
       dt[get(fix.name) %in% exclude, (fix.name) := NA]
       dt[(get(col_name) >= rangeLU[2]) |
            (get(col_name) <= rangeLU[1]), (fix.name) := NA]
