@@ -200,7 +200,7 @@ fixout_conti <-
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       # show plots before and after fixing outliers
       ap <-
-        ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = paste0(col_name,".fixed"))
+        ggplot2::ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = paste0(col_name,".fixed"))
       ap_box <-
         ggplot2::ggplot(dt, ggplot2::aes(get(fix.name))) + ggplot2::geom_boxplot(
           colour = "blue",
