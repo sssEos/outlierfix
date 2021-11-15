@@ -235,6 +235,8 @@ fixout_conti <-
       if (is.null(rangeLU))
         rangeLU <- c(-Inf, Inf)
       fix.name <- paste0(col_name, ".", "fixed")
+      setDT(dt)
+
       dt[, fix.name] <- dt[, col_name]
       dt[get(fix.name) %in% exclude, (fix.name) := NA]
       dt[(get(col_name) >= rangeLU[2]) |
