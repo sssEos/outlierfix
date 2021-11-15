@@ -15,10 +15,6 @@ License: GPL-3
 URL: https://github.com/sssEos/outlierfix
 BugReports: https://github.com/sssEos/outlierfix/issues
 Imports:
-    boxB,
-    ggplot,
-    ggarrange,
-    Winsorize
 Depends:  
     data.table,
     ggplot2,
