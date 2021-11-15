@@ -27,16 +27,16 @@ fixout_conti <-
            exclude = NA,
            logt = FALSE,
            plot = FALSE) {
-    
+
     #required packages
     if (!require("pacman")) install.packages("pacman")
     pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
-    
-    # change the data.frame into data.table 
+
+    # change the data.frame into data.table
     # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
     # overwirte ----detect type
-    if (length(unique(dt[, ..col_name])) < 10) {
+    if (length(unique(dt[, which(colnames(dt)==col_name),with=FALSE])) < 10) {
       warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
@@ -255,7 +255,7 @@ fixout_conti <-
         ) + labs(x = "boxplot")
 
       print("The function is detecting outliers from both sides but will fix them according to the methods chosen.")
-      
+
       if (iden.m %in% c("resistant", "asymmetric", "adjbox")) {
         outlierind <-
           univOutl::boxB(
@@ -303,8 +303,8 @@ fixout_conti <-
           outlier.colour = "red",
           outlier.shape = 1
         ) + labs(x = "fix.boxplot")
-      
-  
+
+
       if(plot==TRUE){
         # suppress warnings from ggplot
         suppressWarnings(print(ggpubr::ggarrange(
@@ -317,15 +317,15 @@ fixout_conti <-
           nrow = 2
         )))
       }
-      
+
 
 
     }
 
 
     dt
-    
-    
+
+
   }
 
 
