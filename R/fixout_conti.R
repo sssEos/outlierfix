@@ -36,7 +36,9 @@ fixout_conti <-
     # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
     # overwirte ----detect type
-    if (length(unique(dt[, ..col_name])) < 10) {
+    # index=which(colnames(dt)==col_name)
+    if (length(unique(dt[, col_name,with=FALSE])) < 10) {
+      print("p")
       warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
