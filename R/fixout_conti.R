@@ -36,7 +36,7 @@ fixout_conti <-
     # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
     # overwirte ----detect type
-    if (length(unique(dt[, ])) < 10) {
+    if (length(unique(dt[, ..col_name])) < 10) {
       warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
