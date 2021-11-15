@@ -32,7 +32,7 @@ dt
 Firstly, we focus on the __age__, set the age limit within 20-60, which make more sense for working age. Enter the number of chosen method for identifying outliers, we try 1 and according to the histogram and boxplot of data to choose the subsequent fix method (enter number)
 ```{r}
 # colname="age"
-# setDT(dt)
+setDT(dt)
 fixout_conti(dt, col_name="age",rangeLU=c(20,60))
 ```
 ### 2. Detecting and fixing outliers in an automatic way
