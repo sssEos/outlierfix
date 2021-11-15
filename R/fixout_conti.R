@@ -192,7 +192,7 @@ fixout_conti <-
         if (fix.method == "asNARight")
           dt[outlierind$upOutl, (fix.name) := NA]
         if (fix.method == "median")
-          dt[outlierind$outliers, (fix.name) := median(dt[!outlierind$outliers, get(fix.name)])]
+          dt[outlierind$outliers, (fix.name) := stats::median(dt[!outlierind$outliers, get(fix.name)])]
         if (fix.method == "mean")
           dt[outlierind$outliers, (fix.name) := mean(dt[!outlierind$outliers, get(fix.name)])]
 
@@ -281,7 +281,7 @@ fixout_conti <-
         if (fix.m == "asNARight")
           dt[outlierind$upOutl, (fix.name) := NA]
         if (fix.m == "median")
-          dt[outlierind$outliers, (fix.name) := median(dt[!outlierind$outliers, get(fix.name)])]
+          dt[outlierind$outliers, (fix.name) := stats::median(dt[!outlierind$outliers, get(fix.name)])]
         if (fix.m == "mean")
           dt[outlierind$outliers, (fix.name) := mean(dt[!outlierind$outliers, get(fix.name)])]
       }
