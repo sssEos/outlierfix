@@ -1,6 +1,7 @@
 #' @title fixout_conti
 #' @description This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
-#' @import data.table ggplot2
+#' @import data.table ggplot2 DescTools ggpubr univOutl
+#' @importFrom("stats", "median")
 #' @param dt A data frame or a data.table.
 #' @param col_name A string indicates column name with data need to be fixed.
 #' @param interactive TRUE/FALSE, whether to fix the outliers in an interactive way.
