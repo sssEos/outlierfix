@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 Install the __outlierfix__ package for setting up
 ```{r setup}
 # library(devtools)
-install_github("sssEos/outlierfix")
+# install_github("sssEos/outlierfix")
 library(outlierfix)
 ```
 
