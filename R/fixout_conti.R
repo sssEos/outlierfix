@@ -279,7 +279,7 @@ fixout_conti <-
       ap <-
         ggplot2::ggplot(dt, ggplot2::aes(x = get(fix.name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = fix.name)
       ap_box <-
-        ggplot2::ggplot(dt, ggplo2::aes(get(fix.name))) + ggplot2::geom_boxplot(
+        ggplot2::ggplot(dt, ggplot2::aes(get(fix.name))) + ggplot2::geom_boxplot(
           colour = "blue",
           fill = "white",
           outlier.colour = "red",
