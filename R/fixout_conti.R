@@ -5,7 +5,7 @@
 #' @param interactive TRUE/FALSE, whether to fix the outliers in an interactive way.
 #' @param iden.m A string shows the chosen method for identifying outliers."resistant": standard boxplot; "asymmetric": modification of standard method to deal with (moderately) skewed data;"adjbox": adjusted boxplot for skewed distributions;"winsorize": the smallest and/or the largest values are replaced by less extreme values.
 #' @param fix.m A string shows the chosen method for fixing outliers. "dropBoth": drop the whole row where outliers are from both sides of the data; "dropLeft": drop the whole row where outliers are from left side of the data; "dropRight": drop the whole row where outliers are from right side of the data; "asNABoth": convert outliers from both sides of the data as missing values; "asNALeft": convert outliers from left side of the data as missing values,"asNARight": convert outliers from right side of the data as missing values; "median": replace outliers with median; "mean": replace outliers with mean.
-#' @import ggplot2 data.table
+#' @import data.table
 #' @param rangeLU The lower and upper limit of range for the data.
 #' @param k A constant to determine the lines outside the upper and lower quartiles.
 #' @param exclude Values that will be excluded in the numbers to be processed. Missing values are removed by default when detecting outliers.

@@ -14,8 +14,8 @@ Description: This package is used to identify and fix outliers in data table. It
 License: GPL-3
 URL: https://github.com/sssEos/outlierfix
 BugReports: https://github.com/sssEos/outlierfix/issues
-Imports: univOutl, base, ggpubr, DescTools, stats
-Depends: data.table, ggplot2
+Imports: univOutl, base, ggpubr, DescTools, stats, ggplot2
+Depends: data.table
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
