@@ -21,7 +21,8 @@ Depends:
     univOutl, 
     base, 
     ggpubr, 
-    DescTools
+    DescTools,
+    stats
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
