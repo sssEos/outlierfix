@@ -54,12 +54,7 @@ fixout_conti <-
            (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
       # display the distribution for deciding which method to identify outliers
       bp <-
-        ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
-          aes(y = ..density..),
-          binwidth = .5,
-          colour = "blue",
-          fill = "white"
-        ) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = "histogram")
+        ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = col_name)
       bp_box <-
         ggplot2::ggplot(dt, aes(get(col_name))) + geom_boxplot(
           colour = "blue",
@@ -70,7 +65,7 @@ fixout_conti <-
       print(ggpubr::ggarrange(
         bp,
         bp_box,
-        labels = c("histogram", "boxplot"),
+        labels = c("density", "boxplot"),
         ncol = 1,
         nrow = 2
       ))
@@ -205,12 +200,7 @@ fixout_conti <-
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       # show plots before and after fixing outliers
       ap <-
-        ggplot2::ggplot(dt, aes(x = get(fix.name))) + geom_histogram(
-          aes(y = ..density..),
-          binwidth = .5,
-          colour = "blue",
-          fill = "white"
-        ) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = "fix.histogram")
+        ggplot(dt, aes(x = get(col_name))) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = paste0(col_name,".fixed"))
       ap_box <-
         ggplot2::ggplot(dt, aes(get(fix.name))) + geom_boxplot(
           colour = "blue",
@@ -242,12 +232,7 @@ fixout_conti <-
                 (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
 
       bp <-
-        ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_histogram(
-          aes(y = ..density..),
-          binwidth = .5,
-          colour = "blue",
-          fill = "white"
-        ) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = "histogram")
+        ggplot2::ggplot(dt, aes(x = get(col_name))) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = col_name)
       bp_box <-
         ggplot2::ggplot(dt, aes(get(col_name))) + geom_boxplot(
           colour = "blue",
@@ -292,12 +277,7 @@ fixout_conti <-
 
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       ap <-
-        ggplot2::ggplot(dt, aes(x = get(fix.name))) + geom_histogram(
-          aes(y = ..density..),
-          binwidth = .5,
-          colour = "blue",
-          fill = "white"
-        ) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = "fix.histogram")
+        ggplot2::ggplot(dt, aes(x = get(fix.name))) + geom_density(alpha = .2, fill = "#FF6655") + labs(x = fix.name)
       ap_box <-
         ggplot2::ggplot(dt, aes(get(fix.name))) + geom_boxplot(
           colour = "blue",
