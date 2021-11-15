@@ -54,14 +54,14 @@ fixout_conti <-
            (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
       # display the distribution for deciding which method to identify outliers
       bp <-
-        ggplot2::ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + labs(x = col_name)
+        ggplot2::ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = col_name)
       bp_box <-
         ggplot2::ggplot(dt, ggplot2::aes(get(col_name))) + ggplot2::geom_boxplot(
           colour = "blue",
           fill = "white",
           outlier.colour = "red",
           outlier.shape = 1
-        ) + labs(x = "boxplot")
+        ) + ggplot2::labs(x = "boxplot")
       print(ggpubr::ggarrange(
         bp,
         bp_box,
@@ -200,14 +200,14 @@ fixout_conti <-
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       # show plots before and after fixing outliers
       ap <-
-        ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + labs(x = paste0(col_name,".fixed"))
+        ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = paste0(col_name,".fixed"))
       ap_box <-
         ggplot2::ggplot(dt, ggplot2::aes(get(fix.name))) + ggplot2::geom_boxplot(
           colour = "blue",
           fill = "white",
           outlier.colour = "red",
           outlier.shape = 1
-        ) + labs(x = "fix.boxplot")
+        ) + ggplot2::labs(x = "fix.boxplot")
       #suppress warnings from ggplot
       suppressWarnings(print(ggpubr::ggarrange(
         bp,
@@ -232,14 +232,14 @@ fixout_conti <-
                 (get(col_name) <= rangeLU[1]), c(fix.name) := NA]
 
       bp <-
-        ggplot2::ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + labs(x = col_name)
+        ggplot2::ggplot(dt, ggplot2::aes(x = get(col_name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = col_name)
       bp_box <-
         ggplot2::ggplot(dt, ggplot2::aes(get(col_name))) + ggplot2::geom_boxplot(
           colour = "blue",
           fill = "white",
           outlier.colour = "red",
           outlier.shape = 1
-        ) + labs(x = "boxplot")
+        ) + ggplot2::labs(x = "boxplot")
 
       print("The function is detecting outliers from both sides but will fix them according to the methods chosen.")
 
@@ -277,14 +277,14 @@ fixout_conti <-
 
       print(paste0("The fixed column (after removing outliers if any) name is ",fix.name))
       ap <-
-        ggplot2::ggplot(dt, ggplot2::aes(x = get(fix.name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + labs(x = fix.name)
+        ggplot2::ggplot(dt, ggplot2::aes(x = get(fix.name))) + ggplot2::geom_density(alpha = .2, fill = "#FF6655") + ggplot2::labs(x = fix.name)
       ap_box <-
         ggplot2::ggplot(dt, ggplo2::aes(get(fix.name))) + ggplot2::geom_boxplot(
           colour = "blue",
           fill = "white",
           outlier.colour = "red",
           outlier.shape = 1
-        ) + labs(x = "fix.boxplot")
+        ) + ggplot2::labs(x = "fix.boxplot")
 
 
       if(plot==TRUE){
