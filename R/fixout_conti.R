@@ -36,7 +36,7 @@ fixout_conti <-
     # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
     # overwirte ----detect type
-    if (length(unique(dt[, ..col_name])) < 10) {
+    if (length(unique(dt[, ])) < 10) {
       warning("The data does not seem to be continuous or have very few observations.")
     }
     if (interactive == TRUE) {
@@ -45,7 +45,7 @@ fixout_conti <-
       if (is.null(rangeLU))
         rangeLU <- c(-Inf, Inf)
       fix.name <- paste0(col_name, ".", "fixed")
-      dt[, fix.name] <- dt[, col_name]
+      dt[, fix.name] <- dt[, ..col_name]
       # assign exclude as NA
 
       dt[get(fix.name) %in% exclude, (fix.name) := NA]
@@ -236,7 +236,7 @@ fixout_conti <-
         rangeLU <- c(-Inf, Inf)
       fix.name <- paste0(col_name, ".", "fixed")
 
-      dt[, fix.name] <- dt[, col_name]
+      dt[, fix.name] <- dt[, ..col_name]
       dt[get(fix.name) %in% exclude, (fix.name) := NA]
       dt[(get(col_name) >= rangeLU[2]) |
            (get(col_name) <= rangeLU[1]), (fix.name) := NA]

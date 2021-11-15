@@ -30,7 +30,7 @@ dt
 ### 1. Detecting and fixing outliers in an interactive way
 Firstly, we focus on the __age__, set the age limit within 20-60, which make more sense for working age. Enter the number of chosen method for identifying outliers, we try 1 and according to the histogram and boxplot of data to choose the subsequent fix method (enter number)
 ```{r}
-fixout_conti(dt, col_name=col_name,rangeLU=c(20,60),interactive = TRUE)
+fixout_conti(dt, col_name="age",rangeLU=c(20,60))
 ```
 ### 2. Detecting and fixing outliers in an automatic way
 choose column __income__ to fix the outliers automatically. In this case, we want to have all figures in range but exclude the income equals to 1200. Missing values are excluded in default.
