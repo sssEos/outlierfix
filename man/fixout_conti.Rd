@@ -44,10 +44,21 @@ A data table contains the fixed column.
 \description{
 This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
 }
+\details{
+More details for methods of identifying can be found in Marcello D'Orazio (2021),Andri Signorell et mult. al. (2021)
+}
 \examples{
 data <- as.data.table(mtcars)
 output_table <- fixout_conti(data,col_name="wt",rangeLU=c(2.5,3.5))
 }
 \references{
-{,title = {univOutl: Detection of Univariate Outliers},author = {Marcello D'Orazio},year = {2021},note = {R package version 0.3},url = {https://CRAN.R-project.org/package=univOutl},}
+{Andri Signorell et mult. al. (2021). DescTools: Tools for descriptive statistics. R package version 0.99.43.}
+
+{Hubert, M., and Vandervieren, E. (2008) `An Adjusted Boxplot for Skewed Distributions', \emph{Computational Statistics and Data Analysis}, 52, pp. 5186-5201.}
+
+{H. Wickham. ggplot2: Elegant Graphics for Data Analysis.Springer-Verlag New York, 2016.}
+
+{ Marcello D'Orazio (2021). univOutl: Detection of Univariate Outliers. R package version 0.3. https://CRAN.R-project.org/package=univOutl}
+
+{McGill, R., Tukey, J. W. and Larsen, W. A. (1978) `Variations of box plots'. \emph{The American Statistician}, 32, pp. 12-16.}
 }

@@ -12,7 +12,12 @@
 #' @param logt TRUE/FALSE, whether the numbers are transformed with an lognormal distribution.
 #' @param plot TRUE/FALSE, whether plots are shown.
 #' @return A data table contains the fixed column.
-#' @references {,title = {univOutl: Detection of Univariate Outliers},author = {Marcello D'Orazio},year = {2021},note = {R package version 0.3},url = {https://CRAN.R-project.org/package=univOutl},}
+#' @details More details for methods of identifying can be found in Marcello D'Orazio (2021),Andri Signorell et mult. al. (2021)
+#' @references {Andri Signorell et mult. al. (2021). DescTools: Tools for descriptive statistics. R package version 0.99.43.}
+#' @references {Hubert, M., and Vandervieren, E. (2008) `An Adjusted Boxplot for Skewed Distributions', \emph{Computational Statistics and Data Analysis}, 52, pp. 5186-5201.}
+#' @references {H. Wickham. ggplot2: Elegant Graphics for Data Analysis.Springer-Verlag New York, 2016.}
+#' @references { Marcello D'Orazio (2021). univOutl: Detection of Univariate Outliers. R package version 0.3. https://CRAN.R-project.org/package=univOutl}
+#' @references {McGill, R., Tukey, J. W. and Larsen, W. A. (1978) `Variations of box plots'. \emph{The American Statistician}, 32, pp. 12-16.}
 #' @examples
 #' data <- as.data.table(mtcars)
 #' output_table <- fixout_conti(data,col_name="wt",rangeLU=c(2.5,3.5))
@@ -29,15 +34,9 @@ fixout_conti <-
            logt = FALSE,
            plot = FALSE) {
 
-    #required packages
-    # if (!require("pacman")) install.packages("pacman")
-    # pacman::p_load(data.table, univOutl, base, ggplot2, ggpubr, DescTools)
-
     # change the data.frame into data.table
-    # if (is.element("data.table", class(dt)) == FALSE)
     dt = as.data.table(dt)
-    # overwirte ----detect type
-    # index=which(colnames(dt)==col_name)
+    # ----detect type
     if (length(unique(dt[, col_name,with=FALSE])) < 10) {
       warning("The data does not seem to be continuous or have very few observations.")
     }
