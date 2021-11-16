@@ -48,3 +48,6 @@ This utility identifies and replaces outliers for continuous variables. It assum
 data <- as.data.table(mtcars)
 output_table <- fixout_conti(data,col_name="wt",rangeLU=c(2.5,3.5))
 }
+\references{
+{,title = {univOutl: Detection of Univariate Outliers},author = {Marcello D'Orazio},year = {2021},note = {R package version 0.3},url = {https://CRAN.R-project.org/package=univOutl},}
+}

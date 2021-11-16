@@ -12,6 +12,7 @@
 #' @param logt TRUE/FALSE, whether the numbers are transformed with an lognormal distribution.
 #' @param plot TRUE/FALSE, whether plots are shown.
 #' @return A data table contains the fixed column.
+#' @references {,title = {univOutl: Detection of Univariate Outliers},author = {Marcello D'Orazio},year = {2021},note = {R package version 0.3},url = {https://CRAN.R-project.org/package=univOutl},}
 #' @examples
 #' data <- as.data.table(mtcars)
 #' output_table <- fixout_conti(data,col_name="wt",rangeLU=c(2.5,3.5))

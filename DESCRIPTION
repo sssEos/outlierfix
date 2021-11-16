@@ -10,12 +10,13 @@ Authors@R: c(
            family = "Choudhary",
            role = "aut",
            email = "vivek.choudhary@ntu.edu.sg"))
-Description: This package is used to identify and fix outliers in data table. It assumes that the columns containing continuous numbers in data table and fix the column without changing original data set with chosen methods accordingly. Users can see the plots and use the interative way to help them decide methods to chose.
+Description: This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
 License: GPL-3
 URL: https://github.com/sssEos/outlierfix
 BugReports: https://github.com/sssEos/outlierfix/issues
-Imports: univOutl, base, ggpubr, DescTools, stats, ggplot2
+Imports: univOutl, base, ggpubr, DescTools, stats, ggplot2, Rdpack
 Depends: data.table
+RdMacros: Rdpack
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
