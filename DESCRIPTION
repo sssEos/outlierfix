@@ -1,15 +1,17 @@
 Package: outlierfix
-Title: Fix outliers in columns of data table
+Title: Fix Outliers in Columns of Data Table
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Xiaodan",
            family = "Shao",
-           role = c("cre","aut"),
+           role = c("aut","cre"),
            email = "SHAO0043@e.ntu.edu.sg"),
     person(given = "Vivek",
            family = "Choudhary",
            role = "aut",
            email = "vivek.choudhary@ntu.edu.sg"))
+Author: Xiaodan Shao [aut, cre], Vivek Choudhary [aut]
+Maintainer: Xiaodan Shao <SHAO0043@e.ntu.edu.sg>
 Description: This utility identifies and replaces outliers for continuous variables. It assumes that the columns containing continuous variable is a data.frame and replaces the column elements that are outlier with NAs. It also provide the density plot for before and after data for users to make assessment on the quality of the data post outlier removal. Users have an option to drop the rows with outlier or keep them after replacement. By default the function will retain the rows. Optionally you can replace these values with their mean or median.
 License: GPL-3
 URL: https://github.com/sssEos/outlierfix
